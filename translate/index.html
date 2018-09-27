@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- 1. Make sure UTF-8 encoding is specified -->
+        <meta charset="utf-8">
+        <title>jQuery Localization Tool Demo</title>
+
+        <!-- 2. Include CSS -->
+        <link type="text/css" rel="stylesheet" href="jquery-localization-tool-master/dist/jquery.localizationTool.css">
+
+    </head>
+    <body>
+        <!-- 3. Have some content to be translated -->
+        <h1>Aprende a usar esta librería</h1>
+        <h2>con esta guía paso a paso</h2>
+        <h3 class="subsubtitle">probablemente será facil</h3>
+
+        <!-- 4. Markup for the language selection tool (this is where the localization widget will appear) -->
+        <div id="selectLanguageDropdown" class="localizationTool"></div>
+
+        <!-- ... just some more content -->
+        <p id="welcomeText">bienvenido! la lista desplegable debe de estar arriba!</p>
+        <input type="text" placeholder="texto de prueba"></input>
+
+        <!-- 5. Add jQuery -->
+        <script src="http://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+
+        <!-- 6. Add localizationTool.js after jQuery -->
+        <script src="jquery-localization-tool-master/src/jquery.localizationTool.js"></script>
+
+        <!-- 7. setup the Localization Tool! -->
+        <script>
+            $('#selectLanguageDropdown').localizationTool({
+                'defaultLanguage' : 'es_MX', /* (optional) although must be defined if you don't want en_GB */
+                'showFlag': true,            /* (optional) show/hide the flag */
+                'showCountry': true,         /* (optional) show/hide the country name */
+                'showLanguage': true,        /* (optional) show/hide the country language */
+                'languages' : {              /* (optional) define **ADDITIONAL** custom languages */
+                    'italian' : {
+                        'country': 'Italy',
+                        'language' : 'Italian',
+                        'countryTranslated': 'Italia',
+                        'languageTranslated': 'Italiano',
+                        'flag' : {
+                            'url' : 'http://upload.wikimedia.org/wikipedia/commons/f/fb/Farm-Fresh_italy.png', /* url of flag image */
+                            'class' : 'italian-flag' /* (optional) class to assign to the flag (e.g., for css styling) */
+                        }
+                    },
+                    'barletta-dialect' : {
+                        'country': 'Barletta',
+                        'language' : 'Barlettano',
+                        'countryTranslated': 'Barlett',
+                        'languageTranslated': "Barlett'n",
+                        'flag': {
+                            'url' : 'http://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_Barletta.png'
+                        }
+                    }
+                },
+                /*
+                 * Translate your strings below
+                 */
+                'strings' : {
+                    /*
+                     * You can specify the text string to translate directly...
+                     */
+                    'Aprende a usar esta librería' : {
+                        'en_GB' : 'ola k ase jQuery.localizationTool.js'
+                    },
+                    /*
+                     * You can also specify elements by selector, by using the notation
+                     * element:<element-name> OR id:<element-id> OR class:<class-name>
+                     */
+                    'element:h2' : {
+
+                        'en_GB' : 'uwquwuwueveve osas'
+                    },
+                    /*
+                     * Example with id. NOTE: ids have priority over any other
+                     * selector in the translation.
+                     */
+                    'id:welcomeText': {
+                        'en_GB' : 'asdas'
+                    },
+                    /*
+                     * Example with class. NOTE: classes have precedence on
+                     * element selectors and free-form text during the
+                     * translation!
+                     */
+                    'class:subsubtitle' : {
+                        'en_GB' : 'k pez'
+                    },
+                    /*
+                     * You can now translate attributes. The notation is like
+                     * <attribute-name>::<id/class/element>:<name>
+                     */
+                    'placeholder::element:input' : {
+                        'en_GB' : 'ora men'
+                    }
+                }
+            });
+            // end of step-by-step guide
+        </script>
+        <script>
+            // a link to display during development
+            if (window.location.href.match(/localhost.*[/]demo/)) {
+                $("body").append('<div><a href="supportedLanguages.html">Preview Supported Languages</a></div>');
+            }
+        </script>
+    </body>
+</html>jquery.localizationTool.css">

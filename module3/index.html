@@ -1,0 +1,56 @@
+
+<!-- Put this in the HTML section in JSFiddle! -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script
+src="https://code.jquery.com/jquery-1.12.4.min.js"
+integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="index.css">
+<div id="app">
+	<p v-if="show">You can see me!</p>
+	<p v-else-if="show2">You can see me2!</p>
+	<p v-else> else stuff</p>
+	<p >Do you also see me?</p>
+	<br />
+	<button type="button" name="button" @click="show = !show" v-bind:style="myStyle">Switch</button>
+	<button type="button" name="button" @click="show2 = !show2" v-bind:style="myStyle">Switch v2</button>
+	<p>
+		{{show}} - {{show2}}
+	</p>
+
+	<template v-if="show && show2">
+
+		<img src="http://pa1.narvii.com/6172/e6092675116ddd704bf4a0330fff4de1c95acdfc_00.gif" />
+	</template>
+
+	<input v-show="show2" type="text" placeholder="me escondo y no pierdo el valor escrito" />
+	<hr />
+	<ul>
+		<li v-for="(ingredient, i) in ingredients" :key="ingredient">{{ ingredient }} ({{ i }})</li>
+	</ul>
+	<hr />
+	<template v-for="(pokemon) in pokemons">
+		<h1>{{pokemon.name}}</h1>
+		<p>{{pokemon.move}}</p>
+	<img v-bind:src="pokemon.sprite" />
+	</template>
+
+	<button @click="getRandomPoke">Enter in tall grass </button>
+	<hr />
+	<ul>
+		<li v-for="person in persons">
+			<div v-for="(value, key, index) in person">{{key}}: {{value}} {{index}}</div>
+		</li>
+	</ul>
+
+	<span v-for="n in 10"> {{ n }}</span>
+	<hr />
+	<template v-for="(ingredient, index) in ingredients">
+		<h1> {{ingredient}}</h1>
+		<p>{{ index }}</p>
+	</template>
+
+</div>
+
+<script src="app.js"></script>

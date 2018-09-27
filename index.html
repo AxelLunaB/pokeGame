@@ -1,0 +1,57 @@
+<script src="vue.js"></script> <!-- LOAD VUE -->
+<link rel="stylesheet" type="text/css" href="index.css">
+
+<div id="app"> <!-- id to refer on vue instance el -->
+  <h1 v-once>{{welcomeMsg}}</h1> <!-- {{variableInData}}  to access a variable. - v-once so it doesnt re render any other time
+  even if the variable has changed-->
+
+  <p>{{sayHello()}} - <a v-bind:href="link"> AR3D </a></p> <!-- {{sayHello()}} calls a method and gives an output.
+    - v-bind:href="variableInData", takes a link on vue instance data an uses it as a link, theres no other way to do this -->
+
+  <input type="text" v-on:input="changeTitle" placeholder="Cambiar texto"> <!--  -->
+  <div>
+      <button v-on:click="addToCount(2, $event)"> click pls to add 2 </button>
+        <button v-on:click="counter--"> click pls to substract 1 </button>
+      <p>{{counter}}</p>
+      <p> {{result()}} | {{output}}</p>
+    <hr/>
+      <p v-on:mousemove="updateCoords">
+        Coodinates: {{ x }} / {{ y }}
+        - <span v-on:mousemove.stop="">DEAD SPOT</span>
+      </p>
+      on KeyUpAlert Enter
+      <input type="text" @keyup.enter="alertMe"/> <!-- v-on -->
+      <br/>  <br/>
+      on Keydown enter change text through event
+      <input type="text" v-on:keydown.enter="value = $event.target.value"/>
+      <p>{{value}}</p>
+      <br /><br />
+      <input type="text" v-model="name" />
+      <p>  {{ name }}  </p>
+
+      <hr />
+      <!-- VUE WITH CSS -->
+
+      <div class="demo" @click="attachRed = !attachRed" :class="divClasses"></div>
+      <div class="demo" :class="divClasses"></div>
+      <div class="demo" :class="[color,divClasses]"></div>
+      <div class="demo" :style="{'background-color': color}"></div>
+      <div class="demo" :style="myStyle"></div>
+      <div class="demo" :style="[myStyle, {height: width + 'px'}]"></div>
+      <hr />
+      <input type="text" v-model="color" placeholder="Color"/>
+      <input type="text" v-model="width" placeholder="width"/>
+      <hr />
+
+
+  </div>
+
+
+  <hr>
+  <p v-html="finishedLink"></p> <!-- dont use this command to refer to untrusted links leaves yourself
+  open to scripts attacks -->
+
+
+
+</div>
+  <script src="index.js"></script>
