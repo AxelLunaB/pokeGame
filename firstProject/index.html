@@ -8,15 +8,21 @@
     <script
     src="https://code.jquery.com/jquery-1.12.4.min.js"
     integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-    crossorigin="anonymous"></script>
+    crossOrigin="anonymous"></script>
 
 </head>
 <body>
   <div id="app">
-    <button @click="playBattleTheme"></button>
-    <button @click="playFx,mainMenu = !mainMenu"></button>
+
+
     <!--BEGIN REG MENU -->
-    <template v-if ="mainMenu">
+    <template v-if ="mainMenu2">
+        <h1 class="text-center">WELCOME TO THE GAME!</h1>
+        <div class="row text-center">
+        <button @click="playMainTheme" class="text-center reg-menu">Start!</button>
+        </div>
+    </template>
+    <template v-if ="mainMenu && !mainMenu2">
       <div class="reg-menu">
         <template v-if="menuPage == 0">
           <h1 class="text-center">CHOOSE YOUR CHARACTER</h1>
@@ -69,7 +75,8 @@
             <img v-bind:src="pokemonOwned[0].sprite" />
           </div>
           <div class="healthbar">
-            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: playerHealth + '%'}">
+              {{ playerHealth }}
 
             </div>
           </div>
@@ -80,30 +87,30 @@
             <img v-bind:src="pokemonCurrent[0].sprite" />
           </div>
           <div class="healthbar">
-            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
-
+            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: monsterHealth + '%'}">
+              {{ monsterHealth }}
             </div>
           </div>
         </div>
       </section>
-      <section class="row controls">
+      <section class="row controls" v-if="!gameIsRunning">
         <div class="small-12 columns">
-          <button id="start-game">START NEW GAME</button>
+          <button id="start-game" @click="startGame">START NEW GAME</button>
         </div>
       </section>
-      <section class="row controls">
+      <section class="row controls" v-else>
         <div class="small-12 columns">
-          <button id="attack">ATTACK</button>
-          <button id="special-attack">SPECIAL ATTACK</button>
-          <button id="heal">HEAL</button>
-          <button id="give-up">GIVE UP</button>
+          <button id="attack" @click="playerAttack">ATTACK</button>
+          <button id="special-attack" @click="playerAttack">SPECIAL ATTACK</button>
+          <button id="heal" @click="heal">HEAL</button>
+          <button id="give-up" @click="giveUp">GIVE UP</button>
         </div>
       </section>
-      <section class="row log">
+      <section class="row log" v-if="turns.length > 0">
         <div class="small-12 columns">
           <ul>
-            <li>
-
+            <li v-for="turn in turns" :class="{'player-turn': turn.isPlayer,'monster-turn': !turn.isPlayer}">
+              {{turn.text}}
             </li>
           </ul>
         </div>
